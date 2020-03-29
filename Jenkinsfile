@@ -34,7 +34,7 @@ pipeline {
                   sh "echo 'hello world'"
                },
                Snyk: {
-                 snykSecurity severity: 'medium', snykInstallation: 'Please define a Snyk installation in the Jenkins Global Tool Configuration. This task will not run without a Snyk installation.', snykTokenId: 'snyk-personal-token'
+                 snykSecurity severity: 'medium', snykInstallation: 'SnykPOC', snykTokenId: 'snyk-personal-token'
                }
             )
          }
