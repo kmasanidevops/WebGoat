@@ -15,7 +15,7 @@ pipeline {
             // Run Maven on a Unix agent.
             sh "cd $WORKSPACE/webgoat-server"
             //sh "mvn -Dmaven.test.failure.ignore=true clean package"
-            sh "mvn -Dmaven.test.failure.ignore=true clean compile"
+            sh "mvn -Dmaven.test.failure.ignore=true clean package"
          
             // To run Maven on a Windows agent, use
             // bat "mvn -Dmaven.test.failure.ignore=true clean package"
