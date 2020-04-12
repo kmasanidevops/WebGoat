@@ -89,7 +89,7 @@ pipeline {
       stage('Deploy: Dev Validation') {
          steps {
             sh "echo 'Sanity check for the [post deployment] environment .. ' "
-            sh "/usr/bin/python /opt/devops/scripts/validate.py ${DOCKER_RELEASE_TAG} dev"
+            sh "/usr/bin/python /opt/devops/scripts/validate.py 2.0 dev"
          }
       }
 
