@@ -89,7 +89,7 @@ pipeline {
       stage('Deploy: Dev Validation') {
          steps {
             sh "echo 'Sanity check for the [post deployment] environment .. ' "
-            sh "/usr/bin/python /opt/devops/scripts/validate.py 3.0 dev"
+            sh "/usr/bin/python /opt/devops/scripts/validate.py 4.0 dev"
          }
       }
 
@@ -111,7 +111,7 @@ pipeline {
       stage('Deploy: Uat Validation') {
          steps {
             sh "echo 'Sanity check for the [post deployment] environment .. ' "
-            sh "/usr/bin/python /opt/devops/scripts/validate.py 3.0 uat"
+            sh "/usr/bin/python /opt/devops/scripts/validate.py 4.0 uat"
          }
       }
       stage('Deploy to PROD - Confirmation') {
@@ -132,7 +132,7 @@ pipeline {
       stage('Deploy: Prod Validation') {
          steps {
             sh "echo 'Sanity check for the [post deployment] environment .. ' "
-            sh "/usr/bin/python /opt/devops/scripts/validate.py 3.0 prod"
+            sh "/usr/bin/python /opt/devops/scripts/validate.py 4.0 prod"
          }
       }
 
