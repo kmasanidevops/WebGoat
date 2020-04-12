@@ -94,8 +94,10 @@ pipeline {
       }
 
       stage('Deploy to UAT - Confirmation') {
-        timeout(time: 15, unit: "MINUTES") {
+        steps {
+          timeout(time: 15, unit: "MINUTES") {
            input message: 'Do you want to approve the deploy in production?', ok: 'Yes'
+          }
         }
       }
     
