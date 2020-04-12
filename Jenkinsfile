@@ -86,5 +86,26 @@ pipeline {
          }
       }      
 
+      stage('Deploy: Dev Validation') {
+         steps {
+            sh "echo 'Sanity check for the environment .. post deployment"
+            sh "/usr/bin/python /opt/devops/scripts/validate.py ${DOCKER_RELEASE_TAG} dev"
+         }
+      }      
+
+      stage('Deploy: UAT') {
+         steps {
+            sh "echo 'Deploying Docker ..' "
+            sh "/usr/bin/python /opt/devops/scripts/deploy_runner.py ${DOCKER_RELEASE_TAG} uat"
+         }
+      }      
+
+      stage('Deploy: PROD') {
+         steps {
+            sh "echo 'Deploying Docker ..' "
+            sh "/usr/bin/python /opt/devops/scripts/deploy_runner.py ${DOCKER_RELEASE_TAG} prod"
+         }
+      }      
+
    }
 }
