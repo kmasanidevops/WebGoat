@@ -92,11 +92,13 @@ pipeline {
             sh "/usr/bin/python /opt/devops/scripts/validate.py ${DOCKER_RELEASE_TAG} dev"
          }
       }
-      // Input Step
-      timeout(time: 15, unit: "MINUTES") {
-         input message: 'Do you want to approve the deploy in production?', ok: 'Yes'
-      }
 
+      stage('Deploy to UAT - Confirmation') {
+        timeout(time: 15, unit: "MINUTES") {
+           input message: 'Do you want to approve the deploy in production?', ok: 'Yes'
+        }
+      }
+    
       stage('Deploy: UAT') {
          steps {
             sh "echo 'Deploying Docker ..' "
