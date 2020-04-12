@@ -96,7 +96,7 @@ pipeline {
       stage('Deploy to UAT - Confirmation') {
         steps {
           timeout(time: 15, unit: "MINUTES") {
-           input message: 'Do you want to approve the deploy in production?', ok: 'Yes'
+           input message: 'Do you want to approve the deploy in UAT?', ok: 'Yes'
           }
         }
       }
@@ -108,6 +108,14 @@ pipeline {
          }
       }      
 
+      stage('Deploy to PROD - Confirmation') {
+        steps {
+          timeout(time: 15, unit: "MINUTES") {
+           input message: 'Do you want to approve the deploy in production?', ok: 'Yes'
+          }
+        }
+      }
+    
       stage('Deploy: PROD') {
          steps {
             sh "echo 'Deploying Docker ..' "
