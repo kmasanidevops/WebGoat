@@ -89,7 +89,7 @@ pipeline {
       stage('Deploy: Dev Validation') {
          steps {
             sh "echo 'Sanity check for the [post deployment] environment .. ' "
-            sh "/usr/bin/python /opt/devops/scripts/validate.py 2.0 dev"
+            sh "/usr/bin/python /opt/devops/scripts/validate.py 3.0 dev"
          }
       }
 
@@ -108,6 +108,12 @@ pipeline {
          }
       }      
 
+      stage('Deploy: Uat Validation') {
+         steps {
+            sh "echo 'Sanity check for the [post deployment] environment .. ' "
+            sh "/usr/bin/python /opt/devops/scripts/validate.py 3.0 uat"
+         }
+      }
       stage('Deploy to PROD - Confirmation') {
         steps {
           timeout(time: 15, unit: "MINUTES") {
@@ -122,6 +128,13 @@ pipeline {
             sh "/usr/bin/python /opt/devops/scripts/deploy_runner.py ${DOCKER_RELEASE_TAG} prod"
          }
       }      
+
+      stage('Deploy: Prod Validation') {
+         steps {
+            sh "echo 'Sanity check for the [post deployment] environment .. ' "
+            sh "/usr/bin/python /opt/devops/scripts/validate.py 3.0 prod"
+         }
+      }
 
    }
 }
