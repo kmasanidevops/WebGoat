@@ -11,7 +11,7 @@ pipeline {
       stage('Build') {
          steps {
             // Get some code from a GitHub repository
-            git 'https://github.com/kiransre/WebGoat.git'
+            git 'https://github.com/kmasanidevops/WebGoat.git'
 
             // Run Maven on a Unix agent.
             sh "cd $WORKSPACE/webgoat-server"
@@ -73,7 +73,9 @@ pipeline {
             // sh "/usr/bin/python /opt/devops/scripts/parse_anchore_analysis.py --outfile $WORKSPACE/anchore-reports/webgoat-local_latest-vuln.json"
 
             sh "echo 'Pushing Docker .. ' "
+            sh "docker tag kmasani/myapp:${DOCKER_RELEASE_TAG} kmasani/myapp:latest"
             sh "docker push kmasani/myapp:${DOCKER_RELEASE_TAG}"
+            sh "docker push kmasani/myapp:latest"
          }
       }
 
