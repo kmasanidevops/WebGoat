@@ -32,9 +32,6 @@ pipeline {
                },
                NexusLifeCycle: {
                   sh "echo 'hello world'"
-               },
-               Snyk: {
-                 snykSecurity severity: 'medium', snykInstallation: 'SnykPOC', snykTokenId: 'snyk-personal-token'
                }
             )
          }
