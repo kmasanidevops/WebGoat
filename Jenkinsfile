@@ -59,10 +59,9 @@ pipeline {
             script {
               SHORT_HASH = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
               DOCKER_RELEASE_TAG = "MYAPP-${SHORT_HASH}"
-              echo "DOCKER_RELEASE_TAG:  $DOCKER_RELEASE_TAG"
-              sh "cd $WORKSPACE/webgoat-flaskapp"
-              app = docker.build("kmasani/myapp:${DOCKER_RELEASE_TAG}")
             }
+            echo "DOCKER_RELEASE_TAG:  $DOCKER_RELEASE_TAG"
+            sh "cd $WORKSPACE/webgoat-flaskapp && /usr/bin/docker build -t kmasani/myapp:${DOCKER_RELEASE_TAG} ."
          }
       }
 
@@ -74,12 +73,7 @@ pipeline {
             // sh "/usr/bin/python /opt/devops/scripts/parse_anchore_analysis.py --outfile $WORKSPACE/anchore-reports/webgoat-local_latest-vuln.json"
 
             sh "echo 'Pushing Docker .. ' "
-            script {
-              docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
-                app.push("kmasani/myapp:${DOCKER_RELEASE_TAG}")
-                app.push("kmasani/myapp:latest")
-              }
-            }
+            sh "docker push kmasani/myapp:${DOCKER_RELEASE_TAG}"
          }
       }
 
