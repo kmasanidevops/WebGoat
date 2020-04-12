@@ -80,7 +80,7 @@ pipeline {
       stage('Deploy: DEV') {
          steps {
             sh "echo 'Deploying Docker ..' "
-            sh "/usr/bin/python /opt/devops/scripts/deploy_runner.py ${DOCKER_RELEASE_TAG}"
+            sh "/usr/bin/python /opt/devops/scripts/deploy_runner.py ${DOCKER_RELEASE_TAG} dev"
          }
       }      
 
